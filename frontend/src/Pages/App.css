@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+.App{
+    min-height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1582778959124-88d5fd4fafa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80");
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0,0,0,0.2);
+    background-blend-mode: multiply;
+    color: white;
+}
+
