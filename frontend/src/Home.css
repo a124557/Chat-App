@@ -1,0 +1,17 @@
+#userIcon{
+    top: 3.5px;
+}
+
+#passwordIcon{
+    top: 4px;
+}
+
+#test{
+    height: 20px;
+    color: black;
+    width: 190px;
+}
+
+a{
+    font-weight: bold;
+}
