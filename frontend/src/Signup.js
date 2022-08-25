@@ -1,7 +1,7 @@
-import { React, useState } from 'react';
-import './Home.css';
+import React from 'react';
+import './Signup.css';
 import { IconContext } from 'react-icons/lib';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 import { RiLockPasswordLine, RiMailLine } from 'react-icons/ri';
 import {
   Container,
@@ -13,17 +13,10 @@ import {
   InputLeftElement,
   Button,
   StackDivider,
-  InputRightElement,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 const Home = () => {
-  //Defining states
-  const [showState, setShowState] = useState(false);
-
-  //Defining functions to handle states
-  const handleClick = () => setShowState(!showState);
-
   return (
     <Container maxW="lg">
       <Box
@@ -37,9 +30,11 @@ const Home = () => {
         borderRadius="md"
       >
         <Stack spacing="4" display="flex" alignItems={'center'}>
-          <Stack spacing={'0'}>
-            <Text fontSize={'4xl'}>Welcome</Text>
-            <Text fontSize={'1xl'}>Please login below</Text>
+          <Stack spacing={'0'} alignItems={'center'}>
+            <Text fontSize={'4xl'}>Get Started</Text>
+            <Text fontSize={'1xl'}>
+              Please create a username and password below
+            </Text>
           </Stack>
           <Stack
             divider={<StackDivider borderColor="gray.400" />}
@@ -51,11 +46,21 @@ const Home = () => {
                 <InputLeftElement pointerEvents={'none'} id={'userIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
                     <div>
+                      <AiOutlineUser />
+                    </div>
+                  </IconContext.Provider>
+                </InputLeftElement>
+                <Input size="lg" placeholder="Name"></Input>
+              </InputGroup>
+              <InputGroup>
+                <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
+                  <IconContext.Provider value={{ size: '1em' }}>
+                    <div>
                       <RiMailLine />
                     </div>
                   </IconContext.Provider>
                 </InputLeftElement>
-                <Input size="lg" placeholder="Email"></Input>
+                <Input size="lg" placeholder="Email address"></Input>
               </InputGroup>
               <InputGroup>
                 <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
@@ -65,21 +70,22 @@ const Home = () => {
                     </div>
                   </IconContext.Provider>
                 </InputLeftElement>
-
                 <Input size="lg" placeholder="Password"></Input>
-                <InputRightElement id={'eye'} onClick={handleClick}>
+              </InputGroup>
+              <InputGroup>
+                <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
                     <div>
-                      {showState ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                      <RiLockPasswordLine />
                     </div>
                   </IconContext.Provider>
-                </InputRightElement>
+                </InputLeftElement>
+                <Input size="lg" placeholder="Confirm Password"></Input>
               </InputGroup>
-              <Button colorScheme={'twitter'}>Log in</Button>
+              <Button colorScheme={'twitter'}>Sign up</Button>
             </Stack>
             <Text fontSize={'sm'}>
-              Don't have an account?
-              <NavLink to="/signup"> Sign up</NavLink>
+              Already have an account? <NavLink to="/"> Login</NavLink>
             </Text>
           </Stack>
         </Stack>
