@@ -66,11 +66,11 @@ const Home = () => {
                   </IconContext.Provider>
                 </InputLeftElement>
 
-                <Input size="lg" placeholder="Password"></Input>
+                <Input size="lg" placeholder="Password" type={showState ? "text" : "password"}></Input>
                 <InputRightElement id={'eye'} onClick={handleClick}>
                   <IconContext.Provider value={{ size: '1em' }}>
                     <div>
-                      {showState ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                      {showState ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                     </div>
                   </IconContext.Provider>
                 </InputRightElement>
