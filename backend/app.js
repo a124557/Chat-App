@@ -1,10 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const {table} = require("./data.js");
+const db = require('./configuration/mongo.js');
 
 //Calling dotenv
 dotenv.config()
 const app = express();
+//Connecting to the MongoDB database
+db();
 
 app.get("/", (req,res) => {
     res.send('Get API is running correctly')
