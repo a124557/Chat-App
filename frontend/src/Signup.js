@@ -1,7 +1,7 @@
-import React from 'react';
+import {React, useState} from 'react';
 import './Signup.css';
 import { IconContext } from 'react-icons/lib';
-import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RiLockPasswordLine, RiMailLine } from 'react-icons/ri';
 import {
   Container,
@@ -13,10 +13,30 @@ import {
   InputLeftElement,
   Button,
   StackDivider,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  InputRightElement
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
+
 const Home = () => {
+    //Defining states
+  const [showPassState, setShowPassState] = useState(false);
+  const [emailState, setEmailState] = useState('');
+  const [submitState, setSubmitState] = useState(false)
+  const [passState, setPassState] = useState('');
+  const [passConfirmState, setPassConfirmState] = useState('');
+
+  //Defining functions to handle states
+  const handleShowPassState = () => setShowPassState(!showPassState);
+  const handleSubmit = () => setSubmitState(true);
+  const handlePass = (password) => setPassState(password.target.value);
+  const handleConfirmPass = (confirmPass) => setPassConfirmState(confirmPass.target.value);
+
+  const passError = submitState === true && passState !== passConfirmState;
+
   return (
     <Container maxW="lg">
       <Box
@@ -62,6 +82,8 @@ const Home = () => {
                 </InputLeftElement>
                 <Input size="lg" placeholder="Email address"></Input>
               </InputGroup>
+              <FormControl isInvalid={passError}>
+
               <InputGroup>
                 <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
@@ -70,8 +92,23 @@ const Home = () => {
                     </div>
                   </IconContext.Provider>
                 </InputLeftElement>
-                <Input size="lg" placeholder="Password"></Input>
+                <Input size="lg" placeholder="Password" value={passState} onChange={handlePass} type={showPassState ? "text" : "password"}></Input>
+                                <InputRightElement id={'eye'} onClick={handleShowPassState}>
+                  <IconContext.Provider value={{ size: '1em' }}>
+                    <div>
+                      {showPassState ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                    </div>
+                  </IconContext.Provider>
+                </InputRightElement>
               </InputGroup>
+              {passError ? (
+                <FormErrorMessage>Passwords do not match</FormErrorMessage>
+              ) : (<FormHelperText></FormHelperText>)}
+              </FormControl>
+
+              <FormControl isInvalid={passError}>
+
+
               <InputGroup>
                 <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
@@ -80,9 +117,13 @@ const Home = () => {
                     </div>
                   </IconContext.Provider>
                 </InputLeftElement>
-                <Input size="lg" placeholder="Confirm Password"></Input>
+                <Input size="lg" placeholder="Confirm Password" value={passConfirmState} onChange={handleConfirmPass}></Input>
               </InputGroup>
-              <Button colorScheme={'twitter'}>Sign up</Button>
+                            {passError ? (
+                <FormErrorMessage>Passwords do not match</FormErrorMessage>
+              ) : (<FormHelperText></FormHelperText>)}
+              </FormControl>
+              <Button colorScheme={'twitter'} onClick={handleSubmit}>Sign up</Button>
             </Stack>
             <Text fontSize={'sm'}>
               Already have an account? <NavLink to="/"> Login</NavLink>

@@ -14,15 +14,27 @@ import {
   Button,
   StackDivider,
   InputRightElement,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 const Home = () => {
   //Defining states
   const [showState, setShowState] = useState(false);
+  const [emailState, setEmailState] = useState('');
+  const [submitState, setSubmitState] = useState(false)
+  const [passState, setPassState] = useState('');
 
   //Defining functions to handle states
   const handleClick = () => setShowState(!showState);
+  const handleEmail = (email) => setEmailState(email.target.value);
+  const handleSubmit = () => setSubmitState(true);
+  const handlePass = (password) => setPassState(password.target.value);
+
+  const emailError = submitState === true && emailState === '';
+  const passError = submitState === true && passState === '';
 
   return (
     <Container maxW="lg">
@@ -47,6 +59,8 @@ const Home = () => {
             spacing={'5'}
           >
             <Stack spacing={'4'}>
+              <FormControl isInvalid={emailError}>
+
               <InputGroup>
                 <InputLeftElement pointerEvents={'none'} id={'userIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
@@ -55,8 +69,14 @@ const Home = () => {
                     </div>
                   </IconContext.Provider>
                 </InputLeftElement>
-                <Input size="lg" placeholder="Email"></Input>
+                <Input size="lg" placeholder="Email" type={'email'} value={emailState} onChange={handleEmail}></Input>
               </InputGroup>
+              {emailError && submitState === true ? (
+                <FormErrorMessage>Please enter an email</FormErrorMessage>
+              ) : (<FormHelperText></FormHelperText>)}
+              </FormControl>
+              <FormControl isInvalid={passError}>
+
               <InputGroup>
                 <InputLeftElement pointerEvents={'none'} id={'passwordIcon'}>
                   <IconContext.Provider value={{ size: '1em' }}>
@@ -66,7 +86,7 @@ const Home = () => {
                   </IconContext.Provider>
                 </InputLeftElement>
 
-                <Input size="lg" placeholder="Password" type={showState ? "text" : "password"}></Input>
+                <Input size="lg" placeholder="Password" value={passState} onChange={handlePass} type={showState ? "text" : "password"}></Input>
                 <InputRightElement id={'eye'} onClick={handleClick}>
                   <IconContext.Provider value={{ size: '1em' }}>
                     <div>
@@ -75,7 +95,11 @@ const Home = () => {
                   </IconContext.Provider>
                 </InputRightElement>
               </InputGroup>
-              <Button colorScheme={'twitter'}>Log in</Button>
+              {submitState && passError ? (
+                <FormErrorMessage>Please enter a password</FormErrorMessage>
+              ) : (<FormHelperText></FormHelperText>)}
+              </FormControl>
+              <Button colorScheme={'twitter'} onClick={handleSubmit}>Log in</Button>
             </Stack>
             <Text fontSize={'sm'}>
               Don't have an account?
