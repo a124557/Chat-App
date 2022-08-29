@@ -2,7 +2,7 @@
 
 ### Languages/Technologies
 
-HTML/CSS, JavaScript, MongoDB, Express, ReactJS, Node.js
+HTML/CSS, JavaScript, MongoDB, Express, ReactJS, Node.js, and Chakra UI.
 
 This app serves as an online chatting platform where users can message each other either one-on-one, or in group chats.
 
