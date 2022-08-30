@@ -18,7 +18,6 @@ const userSchema = mongoose.Schema(
     },
     picture: {
       type: String,
-      required: true,
       default: "https://img.icons8.com/ios-glyphs/344/user--v1.png",
     },
   },
