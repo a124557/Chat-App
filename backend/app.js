@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { table } = require("./data.js");
 const db = require("./configuration/mongo.js");
+const userRoutes = require('./routes/userRoutes');
 
 //Calling dotenv
 dotenv.config();
@@ -9,19 +10,14 @@ const app = express();
 //Connecting to the MongoDB database
 db();
 
+//Telling the server to accept JSON data
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Get API is running correctly");
 });
 
-app.get("/api/chat", (req, res) => {
-  res.send(chats);
-});
-
-app.get("/api/chat/:id", (req, res) => {
-  //Here c refers to a key value in our data table
-  const data = table.find((c) => c.name === req.params.id);
-  res.send(data);
-});
+app.use("/api/user", userRoutes)
 
 const PORT = process.env.PORT || 4000;
 

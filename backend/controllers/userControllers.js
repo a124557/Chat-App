@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel.js');
+const generateToken = require('../configuration/token');
 
 //Func for registering user
 const registerUser = asyncHandler(async (req,res) => {
@@ -27,9 +28,8 @@ const registerUser = asyncHandler(async (req,res) => {
     /*If a user is sucessfully created, we send a sucess message and a token that
     is generated to validate their credentials*/
     if(user) {
-        res.status(201).send("User sucessfully created.");
-        res.json({
-            token: generateToken(Useuserr._id),
+        res.status(201).json({
+            token: generateToken(user._id),
         })
     } else {
         res.status(400);
