@@ -36,9 +36,16 @@ const registerUser = asyncHandler(async (req,res) => {
         throw new Error("Unable to create new user.");
     }
 
+const authenticateUser = asyncHandler(async(req,res) => {})
+    const {email1, password1} = req.body;
 
+    //Find the user
+    const user1 = await User.findOne({email});
 
-
+    //Check if user exists in database
+    if(user1) {
+        res.send('User found');
+    }
 })
 
 module.exports = {registerUser};
