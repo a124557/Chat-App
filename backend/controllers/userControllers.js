@@ -37,15 +37,18 @@ const registerUser = asyncHandler(async (req,res) => {
     }
 
 const authenticateUser = asyncHandler(async(req,res) => {})
-    const {email1, password1} = req.body;
+    const {email, password1} = req.body;
 
     //Find the user in mongoDB
-    const user1 = await User.findOne({email});
+    const user = await User.findOne({email});
 
     //Check if user exists in database
-    if(user1) {
-        res.send('User found');
+    if(user && ()) {
+        res.json({
+            name: user.name,
+            email: user.email,
+        });
     }
 })
 
-module.exports = {registerUser};
+module.exports = {registerUser, authenticateUser};
