@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { table } = require("./data.js");
 const db = require("./configuration/mongo.js");
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 //Calling dotenv
 dotenv.config();
@@ -17,7 +18,10 @@ app.get("/", (req, res) => {
   res.send("Get API is running correctly");
 });
 
-app.use("/api/user", userRoutes)
+app.use("/api/user", userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
 
