@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (userFound) {
     res.status(400);
     throw new Error(
-      "A user associated with this email address already exists."
+      "A user associated with this email address already exists. Please try a different email address."
     );
   }
 
@@ -52,7 +52,7 @@ const authenticateUser = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
-    res.send("Password incorrect or user not found");
+    res.send("Password incorrect or user was not found");
   }
 });
 
