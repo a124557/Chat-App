@@ -33,6 +33,7 @@ const Home = () => {
   const [submitState, setSubmitState] = useState(false);
   const [passState, setPassState] = useState('');
   const [passConfirmState, setPassConfirmState] = useState('');
+  const [picture, setPicture] = useState();
 
   //Defining functions to handle states
   const handleShowPassState = () => setShowPassState(!showPassState);
@@ -196,6 +197,23 @@ const Home = () => {
                 ) : (
                   <FormHelperText></FormHelperText>
                 )}
+              </FormControl>
+
+              <FormControl>
+                <InputGroup>
+                <InputLeftElement pointerEvents={'none'}>
+                  <IconContext.Provider value = {{size: '1em'}}>
+                    <div>
+                      <AiOutlineUser/>
+                    </div>
+                  </IconContext.Provider>
+                </InputLeftElement>
+                <Input
+                size="lg"
+                type={'file'}
+                name = 'img'
+                ></Input>
+                </InputGroup>
               </FormControl>
               <Button colorScheme={'twitter'} onClick={handleSubmit}>
                 Sign up
