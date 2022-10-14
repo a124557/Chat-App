@@ -21,6 +21,7 @@ import {
   FormErrorMessage,
   FormHelperText,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
@@ -34,6 +35,22 @@ const Home = () => {
   const [passState, setPassState] = useState('');
   const [passConfirmState, setPassConfirmState] = useState('');
   const [picture, setPicture] = useState();
+  const toast = useToast();
+
+  const postDetails = (pics) => {
+    setLoading(true);
+    if(pic == undefined) {
+      toast({
+        title: "Please select an image",
+        status: 'warning',
+         duration: 5000,
+         isClosable: true,
+         position: "bottom"
+      });
+      return;
+    }
+  };
+
 
   //Defining functions to handle states
   const handleShowPassState = () => setShowPassState(!showPassState);
@@ -45,6 +62,8 @@ const Home = () => {
   const handlePass = password => setPassState(password.target.value);
   const handleConfirmPass = confirmPass =>
     setPassConfirmState(confirmPass.target.value);
+
+    
 
   const passError = submitState === true && passState !== passConfirmState;
   const noPassError =
@@ -212,6 +231,7 @@ const Home = () => {
                 size="lg"
                 type={'file'}
                 name = 'img'
+                onChange = {(e) => postDetails(e.target.files[0])}
                 ></Input>
                 </InputGroup>
               </FormControl>
