@@ -48,8 +48,8 @@ const Home = () => {
          position: "bottom"
       });
       return;
-    }
 
+    }
     if(pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
@@ -60,8 +60,25 @@ const Home = () => {
         body:data,
 
       }).then((res) => res.json())
-      .then
-    };
+      .then((data) => {
+        setPicture(data.url.toString());
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+    } else {
+      toast({
+        title: "Please select an image",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
   };
 
 
