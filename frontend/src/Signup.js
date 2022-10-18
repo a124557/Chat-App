@@ -35,11 +35,12 @@ const Home = () => {
   const [passState, setPassState] = useState('');
   const [passConfirmState, setPassConfirmState] = useState('');
   const [picture, setPicture] = useState();
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
 
   const postDetails = (pics) => {
     setLoading(true);
-    if(pic == undefined) {
+    if(picture === undefined) {
       toast({
         title: "Please select an image",
         status: 'warning',
@@ -265,7 +266,7 @@ const Home = () => {
                 ></Input>
                 </InputGroup>
               </FormControl>
-              <Button colorScheme={'twitter'} onClick={handleSubmit}>
+              <Button colorScheme={'twitter'} onClick={handleSubmit} isLoading={loading}>
                 Sign up
               </Button>
             </Stack>
