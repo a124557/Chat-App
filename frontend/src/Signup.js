@@ -51,16 +51,17 @@ const Home = () => {
       return;
 
     }
-    if(pics.type === "image/jpeg" || pics.type === "image/png") {
+    if(picture.type === "image/jpeg" || picture.type === "image/png") {
       const data = new FormData();
-      data.append("file", pics);
+      data.append("file", picture);
       data.append("upload_preset", "chat-app");
       data.append("cloud_name", "dwwaise5l");
-      fetch("CLOUDINARY_URL=cloudinary://647214422713977:KBMxUcIkFh9i5gb1TJE-5I48D0k@dwwaise5l", {
+      fetch("https://api.cloudinary.com/v1_1/dwwaise5l/image/upload", {
         method: 'post', 
         body:data,
 
-      }).then((res) => res.json())
+      })
+      .then((res) => res.json())
       .then((data) => {
         setPicture(data.url.toString());
         setLoading(false);
