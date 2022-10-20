@@ -40,7 +40,7 @@ const Home = () => {
 
   const postDetails = (pics) => {
     setLoading(true);
-    if(picture === undefined) {
+    if(pics === undefined) {
       toast({
         title: "Please select an image",
         status: 'warning',
@@ -51,9 +51,9 @@ const Home = () => {
       return;
 
     }
-    if(picture.type === "image/jpeg" || picture.type === "image/png") {
+    if(pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
-      data.append("file", picture);
+      data.append("file", pics);
       data.append("upload_preset", "chat-app");
       data.append("cloud_name", "dwwaise5l");
       fetch("https://api.cloudinary.com/v1_1/dwwaise5l/image/upload", {
