@@ -34,7 +34,7 @@ const Home = () => {
   const [submitState, setSubmitState] = useState(false);
   const [passState, setPassState] = useState('');
   const [passConfirmState, setPassConfirmState] = useState('');
-  const [picture, setPicture] = useState();
+  const [pic, setPicture] = useState();
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
@@ -46,10 +46,9 @@ const Home = () => {
         status: 'warning',
          duration: 5000,
          isClosable: true,
-         position: "bottom"
+         position: "bottom",
       });
       return;
-
     }
     if(pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
@@ -60,8 +59,7 @@ const Home = () => {
         method: 'post', 
         body:data,
 
-      })
-      .then((res) => res.json())
+      }).then((res) => res.json())
       .then((data) => {
         setPicture(data.url.toString());
         setLoading(false);
@@ -262,7 +260,7 @@ const Home = () => {
                 <Input
                 size="lg"
                 type={'file'}
-                name = 'img'
+                accept = 'image/*'
                 onChange = {(e) => postDetails(e.target.files[0])}
                 ></Input>
                 </InputGroup>
