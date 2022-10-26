@@ -81,6 +81,11 @@ const Home = () => {
     }
   };
 
+  const submitHandler = async () => {
+    setLoading(true);
+    return;
+  };
+
 
   //Defining functions to handle states
   const handleShowPassState = () => setShowPassState(!showPassState);
