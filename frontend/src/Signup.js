@@ -81,10 +81,15 @@ const Home = () => {
     }
   };
 
-  const submitHandler = async () => {
-    setLoading(true);
-    return;
-  };
+  //API request to store user info into database
+  try {
+    const config = {
+      headers: (
+        "Content-type":"application/json",
+
+      )
+    }
+  }
 
 
   //Defining functions to handle states
