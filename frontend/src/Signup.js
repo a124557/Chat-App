@@ -24,6 +24,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
+import axios from "axios";
 
 const Home = () => {
   //Defining states
@@ -79,17 +80,27 @@ const Home = () => {
       setLoading(false);
       return;
     }
-  };
 
   //API request to store user info into database
   try {
-    const config = {
-      headers: (
-        "Content-type":"application/json",
+      const config  = {
+        headers: {
+          "Content-type": "application/json",
+          
+        },
+      };
 
-      )
-    }
+      const {data} = await axios.post("/api/user", {name,email,password, pic}, 
+      config
+      );
+  } catch (error) {
+    
   }
+
+
+  };
+
+
 
 
   //Defining functions to handle states
