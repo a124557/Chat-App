@@ -23,8 +23,9 @@ import {
   InputRightElement,
   useToast,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, unstable_HistoryRouter } from 'react-router-dom';
 import axios from "axios";
+import useHistory from 'react-router-dom';
 
 const Home = () => {
   //Defining states
@@ -38,6 +39,7 @@ const Home = () => {
   const [pic, setPicture] = useState();
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const history = useHistory();
 
   const postDetails = (pics) => {
     setLoading(true);
@@ -90,11 +92,32 @@ const Home = () => {
         },
       };
 
-      const {data} = await axios.post("/api/user", {name,email,password, pic}, 
+      const {data} = await axios.post(
+        "/api/user", 
+        {name,email,password, pic}, 
       config
       );
+      toast({
+        title: "Registration Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      localStorage.setItem('userInfo',JSON.stringify(data));
+      setLoading(false);
+      history.pushState('/chats')
   } catch (error) {
-    
+    toast({
+      title: "Error has occured",
+      descritpion: error.response.data.message,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    });
+    setLoading(false);
   }
 
 
