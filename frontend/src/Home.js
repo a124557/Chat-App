@@ -17,6 +17,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
+  Toast,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
@@ -26,6 +27,22 @@ const Home = () => {
   const [emailState, setEmailState] = useState('');
   const [submitState, setSubmitState] = useState(false)
   const [passState, setPassState] = useState('');
+  const [loading, setLoading] = useSate(false);
+
+  const submitHandler  = async () => {
+    setLoading(true);
+    if(!emailState || passState) {
+      Toast({
+        title: "Please fill all fields",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom"
+      });
+      setLoading(false);
+      return;
+    }
+  }
 
   //Defining functions to handle states
   const handleClick = () => setShowState(!showState);
