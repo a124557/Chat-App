@@ -118,7 +118,7 @@ const Home = () => {
       position: "bottom",
     });
     setLoading(false);
-  }
+    }
   };
 
 

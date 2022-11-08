@@ -29,6 +29,9 @@ const Home = () => {
   const [passState, setPassState] = useState('');
   const [loading, setLoading] = useSate(false);
 
+  const toast = useToast();
+  const history = useHistory();
+
   const submitHandler  = async () => {
     setLoading(true);
     if(!emailState || passState) {
@@ -41,6 +44,22 @@ const Home = () => {
       });
       setLoading(false);
       return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      toast({
+        title: "Login Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom"
+        });
     }
   }
 
