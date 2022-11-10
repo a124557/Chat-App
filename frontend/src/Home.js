@@ -17,9 +17,12 @@ import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
-  Toast,
+  useToast,
+  Toast
 } from '@chakra-ui/react';
+import {useNavigate} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const Home = () => {
   //Defining states
@@ -27,10 +30,10 @@ const Home = () => {
   const [emailState, setEmailState] = useState('');
   const [submitState, setSubmitState] = useState(false)
   const [passState, setPassState] = useState('');
-  const [loading, setLoading] = useSate(false);
+  const [loading, setLoading] = useState(false);
 
   const toast = useToast();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const submitHandler  = async () => {
     setLoading(true);
@@ -53,6 +56,12 @@ const Home = () => {
         },
       };
 
+      const {data} = await axios.post(
+        "/api/user/login",
+        {emailState, passState},
+        config
+      );
+
       toast({
         title: "Login Successful",
         status: "success",
@@ -60,12 +69,26 @@ const Home = () => {
         isClosable: true,
         position: "bottom"
         });
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        setLoading(false);
+        navigate("/chats");
+    } catch(error) {
+      toast({
+        title: "An error has occured",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
     }
-  }
+  };
 
   //Defining functions to handle states
   const handleClick = () => setShowState(!showState);
   const handleEmail = (email) => setEmailState(email.target.value);
+  // eslint-disable-next-line
   const handleSubmit = () => setSubmitState(true);
   const handlePass = (password) => setPassState(password.target.value);
 
@@ -135,7 +158,7 @@ const Home = () => {
                 <FormErrorMessage>Please enter a password</FormErrorMessage>
               ) : (<FormHelperText></FormHelperText>)}
               </FormControl>
-              <Button colorScheme={'twitter'} onClick={handleSubmit}>Log in</Button>
+              <Button colorScheme={'twitter'} onClick={submitHandler} isLoading={loading}>Log in</Button>
             </Stack>
             <Text fontSize={'sm'}>
               Don't have an account?

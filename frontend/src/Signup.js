@@ -121,7 +121,7 @@ const Home = () => {
     }
   };
 
-
+  const submitHandler = () => {};
 
 
 
@@ -132,6 +132,7 @@ const Home = () => {
     setConfirmPassState(!showConfirmPassState);
   const handleNameState = name => setNameState(name.target.value);
   const handleEmailState = email => setEmailState(email.target.value);
+  // eslint-disable-next-line
   const handleSubmit = () => setSubmitState(true);
   const handlePass = password => setPassState(password.target.value);
   const handleConfirmPass = confirmPass =>
@@ -309,7 +310,7 @@ const Home = () => {
                 ></Input>
                 </InputGroup>
               </FormControl>
-              <Button colorScheme={'twitter'} onClick={handleSubmit} isLoading={loading}>
+              <Button colorScheme={'twitter'} onClick={submitHandler} isLoading={loading}>
                 Sign up
               </Button>
             </Stack>
