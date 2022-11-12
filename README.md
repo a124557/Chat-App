@@ -13,7 +13,7 @@ Features to be added:
 1. One-to-one chatting
 2. Group chatting
 3. Ability to upload profile photo
-4. Users can log in witht their own credentials
+4. Users can log in with their own credentials
 
 ### Building
 
